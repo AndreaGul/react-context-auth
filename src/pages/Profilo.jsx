@@ -7,7 +7,7 @@ export default function (){
     return(
         <>
         <h1>Sei Loggato</h1>
-        <button onClick={logout} >logout</button>
+        <div><button onClick={logout} >logout</button></div>
         </>
     )
 }

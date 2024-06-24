@@ -1,5 +1,6 @@
 import { createContext , useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useStorage from "../hooks/useStorage";
 
 const AuthContext = createContext();
 
@@ -7,9 +8,9 @@ const AuthProvider = ({children})=>{
 
     const navigate = useNavigate();
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useStorage(false, 'isLoggedIn');
 
-    const login = () => {
+    const login = (payload) => {
         setIsLoggedIn(true);
         console.log('ci sono')
         navigate('/profilo');
