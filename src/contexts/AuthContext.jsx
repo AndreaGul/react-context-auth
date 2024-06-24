@@ -7,15 +7,16 @@ const AuthProvider = ({children})=>{
 
     const navigate = useNavigate();
 
-    const [isLoggedIn, seIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const login = (payload) => {
+    const login = () => {
         setIsLoggedIn(true);
-        navigate('/home');
+        console.log('ci sono')
+        navigate('/profilo');
     }
 
     const logout = ()=>{
-        seIsLoggedIn(false);
+        setIsLoggedIn(false);
         navigate('/login');
     }
 

@@ -91,7 +91,7 @@ function App() {
                 <DefaultLayout/>
               </PrivatePage>
             }>
-              <Route path="profilo" element={Profilo}/>
+              <Route path="profilo" element={<Profilo/>}/>
 
             </Route>
         </Routes>
