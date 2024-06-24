@@ -4,6 +4,7 @@ import ElencoPost from "./components/ElencoPost";
 import Home from "./components/Home";
 import PostSingolo from "./components/PostSingolo";
 import LogIn from "./pages/LogIn";
+import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import axios from "axios";
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -64,23 +65,25 @@ function App() {
 
   return (
     <BrowserRouter>
-     <Routes>
-          <Route path="/" element={<DefaultLayout/>}>
-            <Route path="home" element={ <Home/>}/>
-            <Route path="posts" >
-              <Route index element={<ElencoPost response={response} />}/>
-              <Route path=":slug" element={<PostSingolo/>}/>
+      <AuthProvider>
+        <Routes>
+            <Route path="/" element={<DefaultLayout/>}>
+              <Route path="home" element={ <Home/>}/>
+              <Route path="posts" >
+                <Route index element={<ElencoPost response={response} />}/>
+                <Route path=":slug" element={<PostSingolo/>}/>
+              </Route>
+              <Route path="create" element={<Form 
+                tags={tags}
+                categories={categories}
+                onCreate={()=>{
+                  fetchPosts();
+                }}
+                />}/>
+              < Route path="login" element={<LogIn/>}/>
             </Route>
-            <Route path="create" element={<Form 
-              tags={tags}
-              categories={categories}
-              onCreate={()=>{
-                fetchPosts();
-              }}
-              />}/>
-            < Route path="login" element={<LogIn/>}/>
-          </Route>
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
