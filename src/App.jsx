@@ -3,8 +3,10 @@ import Form from "./components/Form";
 import ElencoPost from "./components/ElencoPost";
 import Home from "./components/Home";
 import PostSingolo from "./components/PostSingolo";
+import LogIn from "./pages/LogIn";
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import axios from "axios";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 const apiUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -62,19 +64,22 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Routes>
-    <Route path="/home" element={ <Home/>}/>
-    <Route path="/posts" element={<ElencoPost response={response} />}/>
-    <Route path="/posts/:slug" element={<PostSingolo/>}/>
-     <Route path="/create" element={<Form 
-      tags={tags}
-      categories={categories}
-      onCreate={()=>{
-        fetchPosts();
-      }}
-       />}/>
-      
-      
+     <Routes>
+          <Route path="/" element={<DefaultLayout/>}>
+            <Route path="home" element={ <Home/>}/>
+            <Route path="posts" >
+              <Route index element={<ElencoPost response={response} />}/>
+              <Route path=":slug" element={<PostSingolo/>}/>
+            </Route>
+            <Route path="create" element={<Form 
+              tags={tags}
+              categories={categories}
+              onCreate={()=>{
+                fetchPosts();
+              }}
+              />}/>
+            < Route path="login" element={<LogIn/>}/>
+          </Route>
       </Routes>
     </BrowserRouter>
   );
