@@ -4,6 +4,8 @@ import ElencoPost from "./components/ElencoPost";
 import Home from "./components/Home";
 import PostSingolo from "./components/PostSingolo";
 import LogIn from "./pages/LogIn";
+import Profilo from "./pages/Profilo";
+import PrivatePage from "./middlewares/PrivatePage";
 import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import axios from "axios";
@@ -81,6 +83,16 @@ function App() {
                 }}
                 />}/>
               < Route path="login" element={<LogIn/>}/>
+            </Route>
+
+
+            <Route path="/" element={
+              <PrivatePage>
+                <DefaultLayout/>
+              </PrivatePage>
+            }>
+              <Route path="profilo" element={Profilo}/>
+
             </Route>
         </Routes>
       </AuthProvider>
